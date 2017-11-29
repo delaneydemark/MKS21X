@@ -20,14 +20,15 @@ abstract class LibraryBook extends Book implements Comparable<LibraryBook>{
 
     abstract void returned();
 
-    abstract String circulationStatus()
+    abstract String circulationStatus();
 
     public int compareTo(LibraryBook a){
-	return this.getCallNum()- a.getCallNum();
+    	String cNum = this.getCallNum();
+		return cNum.compareTo(a.getCallNum());
     }
 
     public String toString(){
-	return getTitle()+", " + getAuthor() + ", " +getISBN()+ ", ";
+	return super.toString()+ ", "+circulationStatus()+", "+ callNumber;
     }
     
 }
