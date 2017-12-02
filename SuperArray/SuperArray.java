@@ -12,7 +12,7 @@ public class SuperArray{
 
     public void clear(){
 		for (int i= 0;i<10; i++){
-	   	 data[i]=0;
+	   	 data[i]=null;
 		} 
     }
 
