@@ -1,10 +1,11 @@
-public class Barcode{
+public class Barcode implements Comparable<Barcode>{
 
 	public static void main(String[] args){
 		Barcode a = new Barcode("10309");
 		
 		System.out.println(a.getZip());
-		System.out.println(a.checkSum());
+		System.out.println(Barcode.checkSum(a.getZip()));
+		System.out.println(Barcode.toCode(a.getZip()));
 		System.out.println(a.getCode());
 		
 		Barcode b = new Barcode("10319");
@@ -16,9 +17,11 @@ public class Barcode{
 	}
 
     private String zip;
-    private String[] codes={"||:::",":::||","::|:|","::||:",":|::|",":|:|:",":||::", "|:::|","|::|:","|:|::"};
-
+   
     public Barcode(String z){
+    	if (z.length()!=5){
+    		throw new IllegalArgumentException();
+    	}
 		zip = z;
     }
     
@@ -26,7 +29,17 @@ public class Barcode{
     	return zip;
     }
     
-    public int checkSum(){
+    public static String toZip(String code){
+    	if(code.length()!=32 || code.charAt(0)=='|' && code.charAt(31)=='|'){
+    		throw new IllegalArgumentException();
+    	}
+    	code = code.substring(1,code.length()-1);
+    	for (int i = 1; i<code.length(); i++){
+    		String current = 
+    	}
+    }
+    
+    public static int checkSum(String zip){
     	int sum = 0;
     	for (int i = 0; i<zip.length(); i++){
     		sum+= Integer.parseInt(zip.substring(i,i+1));
@@ -35,11 +48,16 @@ public class Barcode{
     }
     
     public String getCode(){
+    	return toCode(this.getZip());
+    }
+    
+    public static String toCode(String zip){
+    	String[] codes={"||:::",":::||","::|:|","::||:",":|::|",":|:|:",":||::", "|:::|","|::|:","|:|::"};
     	String s = "|";
     	for (int i = 0; i<zip.length(); i++){
     		s+= codes[Integer.parseInt(zip.substring(i,i+1))];
     	}
-    	s+= ""+ codes[this.checkSum()]+ "|";
+    	s+= ""+ codes[Barcode.checkSum(zip)]+ "|";
     	return s;
     }
     
@@ -47,8 +65,13 @@ public class Barcode{
     	return zip.equals(a.getZip());
     }
     
+    public int compareTo(Barcode other){
+    	String a = this.getZip();
+    	return a.compareTo(other.getZip());
+    }
+    
     public String toString(){
-    	return getZip() + "   " +getCode();
+    	return getCode()+ "\n("+ getZip()+")"  ;
     }
 
 }
