@@ -34,8 +34,9 @@ public class Barcode implements Comparable<Barcode>{
     		throw new IllegalArgumentException();
     	}
     	code = code.substring(1,code.length()-1);
-    	for (int i = 1; i<code.length(); i++){
-    		String current = 
+	int i = 0;
+    	for (i<code.length()){
+	    String current = code.substring(i,i+5)
     	}
     }
     
