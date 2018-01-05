@@ -3,7 +3,7 @@ public class SuperArray{
     private int size;
 
     public SuperArray(){
-		data = new String[10];
+		data = new String[2000];
     }
     
     public SuperArray(int startingCapacity){
@@ -11,7 +11,7 @@ public class SuperArray{
     }
 
     public void clear(){
-		for (int i= 0;i<10; i++){
+		for (int i= 0;i<data.length; i++){
 	   	 data[i]=null;
 		} 
     }
@@ -45,7 +45,7 @@ public class SuperArray{
     
     public String set(int index, String element){
 		if (index < 0 || index >= size()){
-	  	  throw new ArrayIndexOutOfBoundsException;
+	  	  throw new ArrayIndexOutOfBoundsException();
 		}
 		String old = data[index];
 		data[index]=element;
@@ -97,11 +97,15 @@ public class SuperArray{
 
 	public void add(int index, String element){
 		String s="";
-		for (int i = size-1; i>=index; i--){
-			s=data[i];
-			data[i+1]= s;
-		} 
-		data[index]= element;
+		if(size==0 && index==1){
+			throw new IndexOutOfBoundsException();
+		}else{
+			for (int i = size-1; i>=index; i--){
+				s=data[i];
+				data[i+1]= s;
+			} 
+			data[index]= element;
+		}
 		size++;
 	}
 
