@@ -108,30 +108,3 @@ public class SuperArray{
 		}
 		size++;
 	}
-
-	public String remove(int index){
-		String removed = data[index];
-		String s;
-		for (int i = index+1; i < size; i++){
-			s=data[i];
-			data[i-1]=s;
-		}
-		size--;
-		return removed;
-	}
-	
-
-	public boolean remove(String element){
-		int index= indexOf(element);
-		String s;
-		for (int i = index+1; i < size; i++){
-			s=data[i];
-			data[i-1]=s;
-		}
-		size--;
-		return true;
-	}
-    
-}
-
-
