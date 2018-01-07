@@ -20,7 +20,7 @@ public class OrderedSuperArray extends SuperArray{
   }
 
   public boolean add(String value){
-      int index=findIndexBinary(value);
+      int index=findIndex(value);
       super.add(index,value);
       return true;
   }
