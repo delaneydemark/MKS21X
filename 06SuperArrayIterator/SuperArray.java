@@ -1,15 +1,16 @@
 import java.util.Iterator;
 
+
 public class SuperArray implements Iterable<String>{
     private String[] data;
     private int size;
-
-	public Iterator<String> iterator(){
+    
+    public Iterator<String> iterator(){
 		return new SuperArrayIterator(this);
     }
 
     public SuperArray(){
-		data = new String[50];
+		data = new String[2000];
     }
     
     public SuperArray(int startingCapacity){
@@ -17,7 +18,7 @@ public class SuperArray implements Iterable<String>{
     }
 
     public void clear(){
-		for (int i= 0;i<10; i++){
+		for (int i= 0;i<data.length; i++){
 	   	 data[i]=null;
 		} 
     }
@@ -31,8 +32,8 @@ public class SuperArray implements Iterable<String>{
     }
 
     public boolean add(String element){
+		data[size]= element;
 		size++;
-		data[size-1]= element;
 		return true;
     }
 
@@ -103,35 +104,15 @@ public class SuperArray implements Iterable<String>{
 
 	public void add(int index, String element){
 		String s="";
-		for (int i = size-1; i>=index; i--){
-			s=data[i];
-			data[i+1]= s;
-		} 
-		data[index]= element;
+		if(size==0 && index==1){
+			throw new IndexOutOfBoundsException();
+		}else{
+			for (int i = size-1; i>=index; i--){
+				s=data[i];
+				data[i+1]= s;
+			} 
+			data[index]= element;
+		}
 		size++;
 	}
-
-	public String remove(int index){
-		String removed = data[index];
-		String s;
-		for (int i = index+1; i < size; i++){
-			s=data[i];
-			data[i-1]=s;
-		}
-		size--;
-		return removed;
-	}
-	
-
-	public boolean remove(String element){
-		int index= indexOf(element);
-		String s;
-		for (int i = index+1; i < size; i++){
-			s=data[i];
-			data[i-1]=s;
-		}
-		size--;
-		return true;
-	}
-    
 }
